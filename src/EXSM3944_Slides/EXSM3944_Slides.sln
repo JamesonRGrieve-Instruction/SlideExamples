@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXSM3944_Slides", "EXSM3944_Slides\EXSM3944_Slides.csproj", "{109339AC-A746-4013-A285-D9C0AA7DC703}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXSM3944_Slides", "EXSM3944_Slides\EXSM3944_Slides.csproj", "{34DAE5B0-89A5-4C99-B152-BACA90A887E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{109339AC-A746-4013-A285-D9C0AA7DC703}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{109339AC-A746-4013-A285-D9C0AA7DC703}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{109339AC-A746-4013-A285-D9C0AA7DC703}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{109339AC-A746-4013-A285-D9C0AA7DC703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34DAE5B0-89A5-4C99-B152-BACA90A887E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34DAE5B0-89A5-4C99-B152-BACA90A887E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34DAE5B0-89A5-4C99-B152-BACA90A887E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34DAE5B0-89A5-4C99-B152-BACA90A887E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3C424C33-B86A-404E-B32B-1D086E7D8739}
+		SolutionGuid = {38D1A35A-DD6A-4113-8C71-3E9C2FC14A8A}
 	EndGlobalSection
 EndGlobal
