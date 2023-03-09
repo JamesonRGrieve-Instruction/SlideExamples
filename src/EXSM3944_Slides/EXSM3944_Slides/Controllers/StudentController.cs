@@ -1,20 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EXSM3944_Slides.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EXSM3944_Slides.Controllers
 {
     public class StudentController : Controller
     {
+        private static List<Student> students = new List<Student>();
+
         // GET: StudentController
         public ActionResult Index()
         {
-            return View();
+            return View(students);
         }
 
         // GET: StudentController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(students.Single(student => student.ID == id));
         }
 
         // GET: StudentController/Create
@@ -26,10 +29,11 @@ namespace EXSM3944_Slides.Controllers
         // POST: StudentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([FromForm]Student student)
         {
             try
             {
+                students.Add(student);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -47,7 +51,7 @@ namespace EXSM3944_Slides.Controllers
         // POST: StudentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, [FromForm] Student student)
         {
             try
             {
@@ -68,7 +72,7 @@ namespace EXSM3944_Slides.Controllers
         // POST: StudentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, [FromForm] Student student)
         {
             try
             {
