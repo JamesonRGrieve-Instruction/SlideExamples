@@ -1,6 +1,7 @@
 ﻿using EXSM3944_Slides.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace EXSM3944_Slides.Controllers
 {
@@ -31,21 +32,31 @@ namespace EXSM3944_Slides.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([FromForm]Student student)
         {
-            try
+            student.FirstName = student.FirstName.Trim();
+            student.LastName = student.LastName.Trim();
+            
+            if (student.FirstName == "John" && student.LastName == "Doe")
+            {
+                ModelState.AddModelError("", "Please do not use fake names.");
+            }
+
+            ActionResult returnChoice = View(student);
+            if (ModelState.IsValid)
+            {
+                returnChoice = RedirectToAction(nameof(Index));
+            }
+            else
             {
                 students.Add(student);
-                return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return returnChoice;
         }
 
         // GET: StudentController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(students.Single(student => student.ID == id));
         }
 
         // POST: StudentController/Edit/5
@@ -55,6 +66,10 @@ namespace EXSM3944_Slides.Controllers
         {
             try
             {
+                Student target = students.Single(findStudent => findStudent.ID == id);
+                target.ID = student.ID;
+                target.FirstName = student.FirstName.Trim();
+                target.LastName = student.LastName.Trim();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -66,7 +81,7 @@ namespace EXSM3944_Slides.Controllers
         // GET: StudentController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(students.Single(student => student.ID == id));
         }
 
         // POST: StudentController/Delete/5
@@ -76,6 +91,7 @@ namespace EXSM3944_Slides.Controllers
         {
             try
             {
+                students.Remove(students.Single(deleteStudent => deleteStudent.ID == id));
                 return RedirectToAction(nameof(Index));
             }
             catch
