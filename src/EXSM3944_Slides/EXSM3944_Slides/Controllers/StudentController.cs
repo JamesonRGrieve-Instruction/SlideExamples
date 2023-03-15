@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EXSM3944_Slides.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
         private static List<Student> students = new List<Student>();
@@ -12,13 +15,13 @@ namespace EXSM3944_Slides.Controllers
         // GET: StudentController
         public ActionResult Index()
         {
-            return View(students);
+            return View(students.Where(student => student.UserID == User.Identity.Name));
         }
 
         // GET: StudentController/Details/5
         public ActionResult Details(int id)
         {
-            return View(students.Single(student => student.ID == id));
+            return View(students.Single(student => student.ID == id && student.UserID == User.Identity.Name));
         }
 
         // GET: StudentController/Create
@@ -34,7 +37,7 @@ namespace EXSM3944_Slides.Controllers
         {
             student.FirstName = student.FirstName.Trim();
             student.LastName = student.LastName.Trim();
-            
+            student.UserID = User.Identity.Name;
             if (student.FirstName == "John" && student.LastName == "Doe")
             {
                 ModelState.AddModelError("", "Please do not use fake names.");
@@ -43,11 +46,12 @@ namespace EXSM3944_Slides.Controllers
             ActionResult returnChoice = View(student);
             if (ModelState.IsValid)
             {
+                students.Add(student);
                 returnChoice = RedirectToAction(nameof(Index));
             }
             else
             {
-                students.Add(student);
+                return View(student);
             }
 
             return returnChoice;
@@ -56,7 +60,7 @@ namespace EXSM3944_Slides.Controllers
         // GET: StudentController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(students.Single(student => student.ID == id));
+            return View(students.Single(student => student.ID == id && student.UserID == User.Identity.Name));
         }
 
         // POST: StudentController/Edit/5
@@ -81,7 +85,7 @@ namespace EXSM3944_Slides.Controllers
         // GET: StudentController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(students.Single(student => student.ID == id));
+            return View(students.Single(student => student.ID == id && student.UserID == User.Identity.Name));
         }
 
         // POST: StudentController/Delete/5
